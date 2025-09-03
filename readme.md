@@ -23,8 +23,10 @@ The World Trends Analyzer enables users to explore global trends across metrics 
 - **Detailed Analysis**: Heatmaps, yearly/country-wise trends, vaccine coverage, box plots, and KMeans clustering for country segmentation.
 - **Country Profiles**: Country-specific trends, distributions, and PCA-based visualizations.
 - **Comparison**: Multi-country metric comparisons and HDI rankings.
-- **Future Predictions**: Time-series forecasting using Prophet with MAE/RMSE metrics and AI-generated insights via Ollama.
-- **AI Insights**: Natural language summaries of trends using Ollama's local LLM models.
+- **Future Predictions**: Time-series forecasting using Prophet with MAE/RMSE metrics and AI-generated insights via Ollama/gpt 4.1 mini.
+- **AI Insights**: Natural language summaries of trends using Ollama's local LLM models and openai gpt 4.1 mini for deployment.
+- **ML Algos**: Comparison between xgboost, xgboost native api and linear regression in prediction tasks.
+- **Deployment**: Deployed using streamlit community cloud service
 
 ## Tech Stack
 - **Core**: Python 3.10+
@@ -32,7 +34,7 @@ The World Trends Analyzer enables users to explore global trends across metrics 
 - **Visualization**: Matplotlib, Seaborn, Plotly Express
 - **Machine Learning**: Scikit-learn (KMeans, PCA, StandardScaler, LinearRegression), XGBoost
 - **Forecasting**: Prophet
-- **AI**: Ollama (local LLM for insights)
+- **AI**: Ollama (local LLM for insights), Openai GPT 4.1 Mini(for online deployment)
 - **Web Framework**: Streamlit
 - **Environment**: Jupyter Notebooks (for data cleaning, EDA, and ML prototyping)
 
