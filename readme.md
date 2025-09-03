@@ -25,7 +25,8 @@ The World Trends Analyzer enables users to explore global trends across metrics 
 - **Comparison**: Multi-country metric comparisons and HDI rankings.
 - **Future Predictions**: Time-series forecasting using Prophet with MAE/RMSE metrics and AI-generated insights via Ollama/gpt 4.1 mini.
 - **AI Insights**: Natural language summaries of trends using Ollama's local LLM models and openai gpt 4.1 mini for deployment.
-- **ML Algos**: Comparison between xgboost, xgboost native api and linear regression in prediction tasks.
+- **ML Algos**: Comparison between xgboost, xgboost native api and linear regression in prediction tasks. XGBoost Native API is the best-performing model among those using all features, with
+                R²: 0.9964 (highest, explaining 99.64% of variance)
 - **Deployment**: Deployed using streamlit community cloud service
 
 ## Tech Stack
