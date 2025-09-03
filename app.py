@@ -13,6 +13,12 @@ from prophet import Prophet
 import ollama
 from sklearn.decomposition import PCA
 import plotly.express as px
+import os 
+from openai import OpenAI
+
+api_key = st.secrets["GITHUB_TOKEN"]
+endpoint = "https://models.github.ai/inference"
+model = "openai/gpt-4.1-mini"
 
 st.set_page_config(
     page_title="World Trends Analyzer",
@@ -1232,20 +1238,18 @@ with tab5:
                 text = f"📅 Year {row['ds']} → Predicted value: {row['yhat']:.2f} (Range: {row['yhat_lower']:.2f} - {row['yhat_upper']:.2f})"
                 summary.append(text)
             Textt_summary = ", ".join(summary)  
-
-            client = ollama.Client()
-
-
-            model = "future_predict"  
             prompt_ans= Textt_summary
 
-
-            response = client.generate(model=model, prompt=prompt_ans)
-            
-
-            # st.text_area("AI Response", response.response, height=200, disabled=True)
-            # st.code(response.response, language="markdown")
-            st.markdown(response.response)
+            client = OpenAI( base_url=endpoint, api_key=api_key, ) 
+            response = client.chat.completions.create( messages=[ { "role": "system", "content":
+            """You are a data reporting assistant. 
+            Your job is to take forecast numbers from Prophet (or any time-series model) 
+            and turn them into a human-friendly analysis. 
+            Always write in clear, simple English with insights and trends. 
+            Mention growth, decline, seasonal effects, and anomalies if they appear.""", }, 
+            { "role": "user", "content": prompt_ans, } ], temperature=1,
+            top_p=1, model="openai/gpt-4.1-mini" ) 
+            st.markdown(response.choices[0].message.content)
 
             st.text(Textt_summary)  
             st.metric("MAE: ", mae)
@@ -1316,19 +1320,22 @@ with tab5:
                     summary.append(text)
                 Textt_summary = ", ".join(summary)  
 
-                client = ollama.Client()
-
-
-                model = "future_predict"  
+              
                 prompt_ans= Textt_summary
 
+                client = OpenAI( base_url=endpoint, api_key=api_key, ) 
+                response = client.chat.completions.create( messages=[ { "role": "system", "content": ""
+            """You are a data reporting assistant. 
+            Your job is to take forecast numbers from Prophet (or any time-series model) 
+            and turn them into a human-friendly analysis. 
+            Always write in clear, simple English with insights and trends. 
+            Mention growth, decline, seasonal effects, and anomalies if they appear.""", }, 
+            { "role": "user", "content": prompt_ans, } ], temperature=1,
+                top_p=1, model="openai/gpt-4.1-mini" ) 
+                st.markdown(response.choices[0].message.content)
 
-                response = client.generate(model=model, prompt=prompt_ans)
-                
 
-                # st.text_area("AI Response", response.response, height=200, disabled=True)
-                # st.code(response.response, language="markdown")
-                st.markdown(response.response)
+               
 
                 st.text(Textt_summary)  
          
@@ -1365,18 +1372,28 @@ with tab6:
             st.header("No Data Feeded")
 
         else:
-            client = ollama.Client()
+            # client = ollama.Client()
 
 
-            model = "data_analyst"  
-            prompt_ans= result
+            # model = "data_analyst"  
+            # prompt_ans= result
 
 
-            response = client.generate(model=model, prompt=prompt_ans)
+            # response = client.generate(model=model, prompt=prompt_ans)
             
 
-            # st.text_area("AI Response", response.response, height=200, disabled=True)
-            # st.code(response.response, language="markdown")
-            st.markdown(response.response)
+            # # st.text_area("AI Response", response.response, height=200, disabled=True)
+            # # st.code(response.response, language="markdown")
+            # st.markdown(response.response)
+           
+            client = OpenAI( base_url=endpoint, api_key=api_key, ) 
+            response = client.chat.completions.create( messages=[ { "role": "system", "content": ""
+            """You are an AI data analyst.
+You generate **structured, professional insights** with headings, bullet points, and future predictions.
+Always provide clear recommendations for countries with low performance.** Also Provide future recommendations for all countries for their improvement **.
+if their are no countries in the query just say ** no data feeded **""", }, 
+            { "role": "user", "content": result, } ], temperature=1,
+    top_p=1, model=model ) 
+            st.markdown(response.choices[0].message.content)
 
   
