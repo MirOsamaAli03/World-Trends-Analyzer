@@ -22,12 +22,12 @@ model = "openai/gpt-4.1-mini"
 
 st.set_page_config(
     page_title="World Trends Analyzer",
-    page_icon="🏂",
+    page_icon="🌍",
     layout="wide",
     initial_sidebar_state="expanded")
 
 # alt.themes.enable("dark")
-
+D:\World_analyzer\app.py
 
 
 
