@@ -16,18 +16,20 @@ import plotly.express as px
 import os 
 from openai import OpenAI
 
-api_key = st.secrets["GITHUB_TOKEN"]
-endpoint = "https://models.github.ai/inference"
-model = "openai/gpt-4.1-mini"
-
 st.set_page_config(
     page_title="World Trends Analyzer",
     page_icon="🌍",
     layout="wide",
     initial_sidebar_state="expanded")
 
+api_key = st.secrets["GITHUB_TOKEN"]
+endpoint = "https://models.github.ai/inference"
+model = "openai/gpt-4.1-mini"
+
+
+
 # alt.themes.enable("dark")
-D:\World_analyzer\app.py
+
 
 
 
